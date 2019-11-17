@@ -1,0 +1,40 @@
+<div class="row">
+
+  <%# UserInfo NewBook %>
+  <%= render 'users/list', user: current_user, book: @book %>
+  <!-- book: @new_book->@bookへ変更（controllerにて定義を要変更 -->
+
+  <%# Users一覧 %>
+  <body>
+    <div class="body">
+
+
+  <div class="col-xs-9">
+    <h2> Books </h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th> Title </th>
+          <th> Opinion </th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+
+         <% @books.each do |book| %>
+           <tbody>
+             <tr>
+              <td>
+                <%= link_to user_path(book.user_id) do %>
+                <%= attachment_image_tag book.user, :profile_image, size: "40x40", format: 'jpeg',fallback: "no_image.jpg"%></td>
+                                <% end %>
+                            <td><%= link_to book.title, book_path(book.id),class:  "book_#{book.id}" %></td>
+                            <td><%= book.body %></td>
+                        </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </body>
